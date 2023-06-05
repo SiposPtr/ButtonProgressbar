@@ -83,10 +83,17 @@ public class ButtonProgressbar: UIButton {
     }
 
     private func animateButtonScale(scaleFactor: CGFloat) {
-        UIView.animate(withDuration: 0.1) {
-            self.transform = CGAffineTransform(scaleX: scaleFactor, y: scaleFactor)
-        }
+        UIView.animate(withDuration: 0.3,
+                       delay: 0,
+                       usingSpringWithDamping: 0.7,
+                       initialSpringVelocity: 0.5,
+                       options: [.allowUserInteraction, .beginFromCurrentState],
+                       animations: {
+                           self.transform = CGAffineTransform(scaleX: scaleFactor, y: scaleFactor)
+                       },
+                       completion: nil)
     }
+
 
 }
 
