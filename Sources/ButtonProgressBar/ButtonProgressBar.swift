@@ -31,7 +31,6 @@ public class ButtonProgressbar: UIButton {
         let lineWidth: CGFloat = 4.0
         
         progressLayer = CAShapeLayer()
-        progressLayer.strokeColor = progressColor.cgColor
         progressLayer.lineWidth = lineWidth
         progressLayer.fillColor = nil
         progressLayer.strokeEnd = 0.0
