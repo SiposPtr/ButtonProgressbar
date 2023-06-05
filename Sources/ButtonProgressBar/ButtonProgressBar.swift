@@ -45,7 +45,7 @@ public class ButtonProgressbar: UIButton {
         super.layoutSubviews()
         
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
-        let radius = (min(bounds.width, bounds.height) - progressLayer.lineWidth) / 5
+        let radius = (min(bounds.width, bounds.height) - progressLayer.lineWidth) / 8
         startAngle = -CGFloat.pi / 5
         let endAngle = startAngle + 2 * CGFloat.pi
         
