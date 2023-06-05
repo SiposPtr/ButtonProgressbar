@@ -4,9 +4,6 @@ public class ButtonProgressbar: UIButton {
 
     private var progressLayer: CAShapeLayer!
     private var startAngle: CGFloat!
-    public enum position {
-        case left, right, top, bottom
-    }
     public init(frame: CGRect, start: Float,pos: position) {
         super.init(frame: frame)
         setupProgressLayer()
@@ -48,4 +45,8 @@ public class ButtonProgressbar: UIButton {
         let circularPath = UIBezierPath(arcCenter: center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
         progressLayer.path = circularPath.cgPath
     }
+}
+
+public enum position {
+    case left, right, top, bottom
 }
