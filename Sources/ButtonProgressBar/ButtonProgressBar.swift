@@ -8,7 +8,7 @@ public class ButtonProgressbar: UIButton {
     public override init(frame: CGRect, start: Float) {
         super.init(frame: frame)
         setupProgressLayer()
-        startAngle = start
+        startAngle = CGFloat(start)
     }
 
     public required init?(coder aDecoder: NSCoder) {
