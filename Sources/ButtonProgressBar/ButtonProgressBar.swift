@@ -16,7 +16,7 @@ public class ButtonProgressbar: UIButton {
         self.layer.masksToBounds = true
         setupProgressLayer()
         startAngle = CGFloat(start)
-        self.progressColor = UIColor(cgColor: progressColor)
+        self.progressColor = UIColor(cgColor: progressColor) ?? UIColor.gray // Provide a default color, such as gray
         self.pos = pos
     }
     
