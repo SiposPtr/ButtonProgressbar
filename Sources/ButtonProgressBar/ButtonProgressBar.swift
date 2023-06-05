@@ -8,7 +8,7 @@ public class ButtonProgressbar: UIButton {
         super.init(frame: frame)
         
         self.layer.borderWidth = borderWidth
-        self.layer?.borderColor = borderColor
+        self.layer.borderColor = borderColor
         self.layer.cornerRadius = cornerRadius
         self.layer.masksToBounds = true
         setupProgressLayer()
