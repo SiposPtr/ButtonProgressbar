@@ -22,10 +22,6 @@ public class ButtonProgressbar: UIButton {
     
     public var pos: Position!
     
-    public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setupProgressLayer()
-    }
     
     private func setupProgressLayer() {
         let lineWidth: CGFloat = 4.0
