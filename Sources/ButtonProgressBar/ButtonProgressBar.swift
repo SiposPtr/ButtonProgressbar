@@ -1,6 +1,5 @@
 import UIKit
 
-
 public class ButtonProgressbar: UIButton {
 
     private var progressLayer: CAShapeLayer!
@@ -15,7 +14,7 @@ public class ButtonProgressbar: UIButton {
 
         self.layer.borderWidth = borderWidth
         self.layer.borderColor = borderColor
-        self.layer.cornerRadius = cornerRadius
+        self.layer.cornerRadius = CGFloat(cornerRadius)
         self.layer.masksToBounds = true
         setupProgressLayer()
         startAngle = CGFloat(start)
@@ -65,8 +64,8 @@ public class ButtonProgressbar: UIButton {
         super.layoutSubviews()
 
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
-        let radius = (min(bounds.width, bounds.height) - progressLayer.lineWidth) / 8
-        startAngle = -CGFloat.pi / 5
+        let radius = min(bounds.width, bounds.height) / 2 - progressLayer.lineWidth / 2
+        startAngle = -CGFloat.pi / 2
         let endAngle = startAngle + 2 * CGFloat.pi
 
         let circularPath = UIBezierPath(arcCenter: center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
@@ -99,7 +98,6 @@ public class ButtonProgressbar: UIButton {
             })
         }
     }
-
 }
 
 public enum Position {
