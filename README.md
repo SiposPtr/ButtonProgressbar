@@ -55,3 +55,14 @@ Represents the position options for the button progress bar.
 - `right`
 - `top`
 - `bottom`
+
+## Usage Example
+
+```swift
+// Create a ButtonProgressbar instance
+let frame = CGRect(x: 0, y: 0, width: 200, height: 40)
+let progressBar = ButtonProgressbar(frame: frame, start: 0.0, pos: .bottom, cornerRadius: 8.0, borderWidth: 2.0, borderColor: UIColor.black.cgColor, progressColor: UIColor.blue.cgColor)
+
+// Set the progress to 0.5 (50%)
+progressBar.setProgress(0.5)
+```
