@@ -20,6 +20,9 @@ public class ButtonProgressbar: UIButton {
         self.pos = pos
     }
     
+    required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
     public var pos: Position!
     
     
