@@ -7,12 +7,11 @@ public class ButtonProgressbar: UIButton {
     enum position {
         case left, right, top, bottom
     }
-    public var pos:position!
-
-    public init(frame: CGRect, start: Float) {
+    public init(frame: CGRect, start: Float,pos: position) {
         super.init(frame: frame)
         setupProgressLayer()
         startAngle = CGFloat(start)
+        
     }
 
     public required init?(coder aDecoder: NSCoder) {
