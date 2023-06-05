@@ -4,7 +4,7 @@ public class ButtonProgressbar: UIButton {
 
     private var progressLayer: CAShapeLayer!
     private var startAngle: CGFloat!
-    enum position {
+    public enum position {
         case left, right, top, bottom
     }
     public init(frame: CGRect, start: Float,pos: position) {
