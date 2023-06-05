@@ -50,17 +50,16 @@ public class ButtonProgressbar: UIButton {
         // Position the text relative to the progressLayer
         let textPosition: CGPoint
         switch pos {
-        case .left:
-            textPosition = CGPoint(x: center.x - radius, y: center.y)
-        case .right:
-            textPosition = CGPoint(x: center.x + radius, y: center.y)
-        case .top:
-            textPosition = CGPoint(x: center.x, y: center.y - radius)
-        case .bottom:
-            textPosition = CGPoint(x: center.x, y: center.y + radius)
-        }
-        case .none:
-            print("error")
+            case .left:
+                textPosition = CGPoint(x: center.x - radius, y: center.y)
+            case .right:
+                textPosition = CGPoint(x: center.x + radius, y: center.y)
+            case .top:
+                textPosition = CGPoint(x: center.x, y: center.y - radius)
+            case .bottom:
+                textPosition = CGPoint(x: center.x, y: center.y + radius)
+            default:
+                textPosition = CGPoint(x: center.x - radius, y: center.y)
         }
         titleLabel?.center = textPosition
     }
