@@ -7,7 +7,7 @@ public class ButtonProgressbar: UIButton {
     enum position {
         case left, right, top, bottom
     }
-    private var pos:position!
+    public var pos:position!
 
     public init(frame: CGRect, start: Float) {
         super.init(frame: frame)
