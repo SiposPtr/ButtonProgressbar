@@ -4,8 +4,10 @@ public class ButtonProgressbar: UIButton {
     
     private var progressLayer: CAShapeLayer!
     private var startAngle: CGFloat!
-    private var progressColor: CGColor!
-    public init(frame: CGRect, start: Float, pos: Position,cornerRadius: Double, borderWidth: Double, borderColor: CGColor, progressColor: CGColor) {
+    private var progressColor: UIColor!
+    private var indicatorView: UIActivityIndicatorView!
+    
+    public init(frame: CGRect, start: Float, pos: Position, cornerRadius: Double, borderWidth: Double, borderColor: CGColor, progressColor: CGColor) {
         super.init(frame: frame)
         
         self.layer.borderWidth = borderWidth
@@ -14,7 +16,7 @@ public class ButtonProgressbar: UIButton {
         self.layer.masksToBounds = true
         setupProgressLayer()
         startAngle = CGFloat(start)
-        self.progressColor = progressColor
+        self.progressColor = UIColor(cgColor: progressColor)
         self.pos = pos
     }
     
@@ -29,17 +31,27 @@ public class ButtonProgressbar: UIButton {
         let lineWidth: CGFloat = 4.0
         
         progressLayer = CAShapeLayer()
-        progressLayer.strokeColor = progressColor
+        progressLayer.strokeColor = progressColor.cgColor
         progressLayer.lineWidth = lineWidth
         progressLayer.fillColor = nil
         progressLayer.strokeEnd = 0.0
         
         layer.addSublayer(progressLayer)
+        
+        indicatorView = UIActivityIndicatorView(style: .gray)
+        indicatorView.color = progressColor
+        addSubview(indicatorView)
     }
     
     public func setProgress(_ progress: Double) {
         let clampedProgress = max(0.0, min(progress, 1.0))
         progressLayer.strokeEnd = CGFloat(clampedProgress)
+        
+        if clampedProgress == 0 {
+            indicatorView.startAnimating()
+        } else {
+            indicatorView.stopAnimating()
+        }
     }
     
     public override func layoutSubviews() {
@@ -53,19 +65,21 @@ public class ButtonProgressbar: UIButton {
         let circularPath = UIBezierPath(arcCenter: center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
         progressLayer.path = circularPath.cgPath
         
+        indicatorView.center = center
+        
         // Position the text relative to the progressLayer
         let textPosition: CGPoint
         switch pos {
-            case .left:
-                textPosition = CGPoint(x: center.x - radius, y: center.y)
-            case .right:
-                textPosition = CGPoint(x: center.x + radius, y: center.y)
-            case .top:
-                textPosition = CGPoint(x: center.x, y: center.y - radius)
-            case .bottom:
-                textPosition = CGPoint(x: center.x, y: center.y + radius)
-            default:
-                textPosition = CGPoint(x: center.x - radius, y: center.y)
+        case .left:
+            textPosition = CGPoint(x: center.x - radius, y: center.y)
+        case .right:
+            textPosition = CGPoint(x: center.x + radius, y: center.y)
+        case .top:
+            textPosition = CGPoint(x: center.x, y: center.y - radius)
+        case .bottom:
+            textPosition = CGPoint(x: center.x, y: center.y + radius)
+        default:
+            textPosition = CGPoint(x: center.x - radius, y: center.y)
         }
         titleLabel?.center = textPosition
     }
