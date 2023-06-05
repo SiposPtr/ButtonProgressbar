@@ -4,6 +4,7 @@ import UIKit
 public class ButtonProgressbar: UIButton {
 
     private var progressLayer: CAShapeLayer!
+    private var loadingLabel: UILabel!
     private var startAngle: CGFloat!
     private var progressColor: UIColor
 
@@ -19,6 +20,7 @@ public class ButtonProgressbar: UIButton {
         setupProgressLayer()
         startAngle = CGFloat(start)
         self.pos = pos
+        setupLoadingLabel()
     }
 
     required init?(coder: NSCoder) {
@@ -37,6 +39,14 @@ public class ButtonProgressbar: UIButton {
 
         layer.addSublayer(progressLayer)
     }
+    
+    private func setupLoadingLabel() {
+        loadingLabel = UILabel(frame: bounds)
+        loadingLabel.textAlignment = .center
+        loadingLabel.textColor = .white
+        loadingLabel.font = UIFont.systemFont(ofSize: 20.0)
+        addSubview(loadingLabel)
+    }
 
     public func setProgress(_ progress: Double) {
         let clampedProgress = max(0.0, min(progress, 1.0))
@@ -47,19 +57,23 @@ public class ButtonProgressbar: UIButton {
         animation.duration = 0.3 // Set the duration of the animation to your desired value
         progressLayer.strokeEnd = CGFloat(clampedProgress)
         progressLayer.add(animation, forKey: "progressAnimation")
+        
+        loadingLabel.text = "\(Int(progress * 100))%" // Display the progress percentage
     }
 
     public override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
         let radius = (min(bounds.width, bounds.height) - progressLayer.lineWidth) / 8
         startAngle = -CGFloat.pi / 5
         let endAngle = startAngle + 2 * CGFloat.pi
-        
+
         let circularPath = UIBezierPath(arcCenter: center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
         progressLayer.path = circularPath.cgPath
         
+        loadingLabel.frame = bounds
+
         // Position the text relative to the progressLayer
         let textPosition: CGPoint
         switch pos {
@@ -74,14 +88,14 @@ public class ButtonProgressbar: UIButton {
         default:
             textPosition = CGPoint(x: center.x - radius, y: center.y)
         }
-        titleLabel?.center = textPosition
-        
+        loadingLabel.center = textPosition
+
         // Apply the fade animation
         UIView.animate(withDuration: 0.3, animations: {
-            self.titleLabel?.alpha = 0.0
+            self.loadingLabel.alpha = 0.0
         }) { (_) in
             UIView.animate(withDuration: 0.3, animations: {
-                self.titleLabel?.alpha = 1.0
+                self.loadingLabel.alpha = 1.0
             })
         }
     }
