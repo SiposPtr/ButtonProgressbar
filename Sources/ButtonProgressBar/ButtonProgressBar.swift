@@ -51,15 +51,15 @@ public class ButtonProgressbar: UIButton {
 
     public override func layoutSubviews() {
         super.layoutSubviews()
-
+        
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
         let radius = (min(bounds.width, bounds.height) - progressLayer.lineWidth) / 8
         startAngle = -CGFloat.pi / 5
         let endAngle = startAngle + 2 * CGFloat.pi
-
+        
         let circularPath = UIBezierPath(arcCenter: center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
         progressLayer.path = circularPath.cgPath
-
+        
         // Position the text relative to the progressLayer
         let textPosition: CGPoint
         switch pos {
@@ -75,25 +75,16 @@ public class ButtonProgressbar: UIButton {
             textPosition = CGPoint(x: center.x - radius, y: center.y)
         }
         titleLabel?.center = textPosition
+        
+        // Apply the fade animation
+        UIView.animate(withDuration: 0.3, animations: {
+            self.titleLabel?.alpha = 0.0
+        }) { (_) in
+            UIView.animate(withDuration: 0.3, animations: {
+                self.titleLabel?.alpha = 1.0
+            })
+        }
     }
-    
-    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        animateButtonScale(scaleFactor: 0.9)
-    }
-
-    private func animateButtonScale(scaleFactor: CGFloat) {
-        UIView.animate(withDuration: 0.3,
-                       delay: 0,
-                       usingSpringWithDamping: 0.7,
-                       initialSpringVelocity: 0.5,
-                       options: [.allowUserInteraction, .beginFromCurrentState],
-                       animations: {
-                           self.transform = CGAffineTransform(scaleX: scaleFactor, y: scaleFactor)
-                       },
-                       completion: nil)
-    }
-
 
 }
 
