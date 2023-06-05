@@ -3,6 +3,7 @@ import UIKit
 public class ButtonProgressbar: UIButton {
 
     private var progressLayer: CAShapeLayer!
+    private var startAngle: Float!
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,7 +38,7 @@ public class ButtonProgressbar: UIButton {
 
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
         let radius = (min(bounds.width, bounds.height) - progressLayer.lineWidth) / 5
-        let startAngle = -CGFloat.pi / 5
+        startAngle = -CGFloat.pi / 5
         let endAngle = startAngle + 2 * CGFloat.pi
 
         let circularPath = UIBezierPath(arcCenter: center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
