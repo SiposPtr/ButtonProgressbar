@@ -3,7 +3,7 @@ import UIKit
 public class ButtonProgressbar: UIButton {
 
     private var progressLayer: CAShapeLayer!
-    private var startAngle: Float!
+    private var startAngle: CGFloat!
 
     public override init(frame: CGRect, start: Float) {
         super.init(frame: frame)
