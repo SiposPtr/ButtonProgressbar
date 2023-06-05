@@ -10,7 +10,8 @@ public class ButtonProgressbar: UIButton {
         startAngle = CGFloat(start)
         
     }
-
+    public var pos: position!
+    
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupProgressLayer()
