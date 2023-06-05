@@ -2,10 +2,10 @@ import UIKit
 
 public class ButtonProgressbar: UIButton {
     
+    private var indicatorView: UIActivityIndicatorView!
     private var progressLayer: CAShapeLayer!
     private var startAngle: CGFloat!
-    private var progressColor: UIColor!
-    private var indicatorView: UIActivityIndicatorView!
+    private var progressColor: UIColor
     
     public init(frame: CGRect, start: Float, pos: Position, cornerRadius: Double, borderWidth: Double, borderColor: CGColor, progressColor: CGColor) {
         super.init(frame: frame)
@@ -44,13 +44,13 @@ public class ButtonProgressbar: UIButton {
     
     public func setProgress(_ progress: Double) {
         let clampedProgress = max(0.0, min(progress, 1.0))
-        progressLayer.strokeEnd = CGFloat(clampedProgress)
         
-        if clampedProgress == 0 {
-            indicatorView.startAnimating()
-        } else {
-            indicatorView.stopAnimating()
-        }
+        let animation = CABasicAnimation(keyPath: "strokeEnd")
+        animation.fromValue = progressLayer.strokeEnd
+        animation.toValue = CGFloat(clampedProgress)
+        animation.duration = 0.3 // Set the duration of the animation to your desired value
+        progressLayer.strokeEnd = CGFloat(clampedProgress)
+        progressLayer.add(animation, forKey: "progressAnimation")
     }
     
     public override func layoutSubviews() {
