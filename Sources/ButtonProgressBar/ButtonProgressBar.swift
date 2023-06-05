@@ -4,6 +4,7 @@ public class ButtonProgressbar: UIButton {
     
     private var progressLayer: CAShapeLayer!
     private var startAngle: CGFloat!
+    private var progressColor: UIColor!
     public init(frame: CGRect, start: Float, pos: Position,cornerRadius: Double, borderWidth: Double, borderColor: CGColor, progressColor: UIColor) {
         super.init(frame: frame)
         
@@ -13,6 +14,7 @@ public class ButtonProgressbar: UIButton {
         self.layer.masksToBounds = true
         setupProgressLayer()
         startAngle = CGFloat(start)
+        self.progressColor = progressColor
         self.pos = pos
     }
     
