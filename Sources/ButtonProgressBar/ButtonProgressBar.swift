@@ -5,9 +5,10 @@ public class ButtonProgressbar: UIButton {
     private var progressLayer: CAShapeLayer!
     private var startAngle: Float!
 
-    public override init(frame: CGRect) {
+    public override init(frame: CGRect, start: Float) {
         super.init(frame: frame)
         setupProgressLayer()
+        startAngle = start
     }
 
     public required init?(coder aDecoder: NSCoder) {
