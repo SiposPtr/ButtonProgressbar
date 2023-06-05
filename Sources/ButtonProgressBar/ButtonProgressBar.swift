@@ -59,6 +59,9 @@ public class ButtonProgressbar: UIButton {
         case .bottom:
             textPosition = CGPoint(x: center.x, y: center.y + radius)
         }
+        case .none:
+            print("error")
+        }
         titleLabel?.center = textPosition
     }
 }
