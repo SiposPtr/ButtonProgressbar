@@ -4,8 +4,12 @@ public class ButtonProgressbar: UIButton {
     
     private var progressLayer: CAShapeLayer!
     private var startAngle: CGFloat!
-    public init(frame: CGRect, start: Float, pos: Position) {
+    public init(frame: CGRect, start: Float, pos: Position,cornerRadius: Double, borderWidth: Double) {
         super.init(frame: frame)
+        
+        loginButton.layer.borderWidth = borderWidth
+        loginButton.layer.cornerRadius = cornerRadius
+        loginButton.layer.masksToBounds = true
         setupProgressLayer()
         startAngle = CGFloat(start)
         self.pos = pos
